@@ -24,6 +24,13 @@ app.get("/", (req, res) => {
 // Use the job routes
 app.use("/api/jobs", jobRoutes);
 
+app.use("*", (req, res) => {
+  res.status(404).json({
+    status: "error",
+    message: "Route not found",
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });

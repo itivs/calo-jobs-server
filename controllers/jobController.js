@@ -9,7 +9,7 @@ const getJobs = (req, res) => {
   const jobs = jobManager.getJobs().map((job) => ({
     id: job.id,
     status: job.status,
-    result: job.status === "resolved" ? job.result : undefined,
+    result: job.status === "resolved" ? job.result : null,
     createdAt: job.createdAt,
   }));
   res.json(jobs);
@@ -23,7 +23,7 @@ const getJobById = (req, res) => {
   res.json({
     id: job.id,
     status: job.status,
-    result: job.status === "resolved" ? job.result : undefined,
+    result: job.status === "resolved" ? job.result : null,
     createdAt: job.createdAt,
   });
 };

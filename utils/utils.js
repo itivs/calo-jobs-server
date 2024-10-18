@@ -49,7 +49,7 @@ function getJobById(id) {
 
 function executeJob(job) {
   const delaySeconds = Math.floor(Math.random() * 60) * 5000 + 5000;
-  console.log(`Executing job ${job.id} in ${delaySeconds} seconds`);
+
   setTimeout(async () => {
     try {
       const imageUrl = await fetchRandomFoodImage();
@@ -66,17 +66,12 @@ function executeJob(job) {
 }
 
 async function fetchRandomFoodImage() {
-  const response = await axios.get(process.env.PEXELS_URL, {
-    params: {
-      query: "food",
-      orientation: "landscape",
-    },
-    headers: {
-      Authorization: process.env.PEXELS_ACCESS_KEY,
-    },
-  });
+  const response = await axios.get(
+    `${process.env.UNSPLASH_API_URL}/photos/random?query=food&client_id=${process.env.UNSPLASH_API_KEY}`
+  );
 
-  const imageUrl = response.data.src.original;
+  const imageUrl = response.data.urls.regular;
+
   return imageUrl;
 }
 
